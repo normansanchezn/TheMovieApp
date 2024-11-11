@@ -20,6 +20,6 @@ class MovieRepository(
     }
 
     suspend fun saveMovies(movies: List<MovieEntity>) {
-        movieDao.insertAll(movies)
+        movieDao.insertMovies(movies)
     }
 }
