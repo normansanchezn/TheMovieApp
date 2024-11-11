@@ -1,10 +1,12 @@
 package com.example.themovieapp.presentation.ui
 
+import android.content.Context
 import android.os.Bundle
-import android.view.View
 import androidx.activity.enableEdgeToEdge
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.themovieapp.R
 import com.example.themovieapp.data.model.MovieEntity
 import com.example.themovieapp.databinding.ActivityMainBinding
 import com.example.themovieapp.presentation.extensions.gone
@@ -44,13 +46,30 @@ class MainActivity : AppCompatActivity() {
             }
 
             state.errorMessage?.let { message ->
-                showErrorMessage(message)
+                showErrorMessage(
+                    context = this,
+                    message = message,
+                    onRetry = {
+                        movieViewModel.onIntent(MovieIntent.ReloadMovies)
+                    }
+                )
             }
         }
     }
 
-    private fun showErrorMessage(message: String) {
-
+    private fun showErrorMessage(context: Context, message: String, onRetry: () -> Unit) {
+        val dialog = AlertDialog.Builder(context)
+            .setTitle(getString(R.string.error_title))
+            .setMessage(message)
+            .setCancelable(false)
+            .setPositiveButton(getString(R.string.try_again)) { _, _ ->
+                onRetry()
+            }
+            .setNegativeButton(getString(R.string.cancel)) { dialogInterface, _ ->
+                dialogInterface.dismiss()
+            }
+            .create()
+        dialog.show()
     }
 
     private fun showMovies(movies: List<MovieEntity>) {

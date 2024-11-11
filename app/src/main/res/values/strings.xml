@@ -1,4 +1,7 @@
 <resources>
     <string name="app_name">TheMovieApp</string>
     <string name="movie_poster_desc">Imagen de la película</string>
+    <string name="error_title">Error</string>
+    <string name="try_again">Intentar nuevamente</string>
+    <string name="cancel">Cancelar</string>
 </resources>

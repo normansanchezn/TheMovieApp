@@ -17,7 +17,22 @@ class MovieViewModel(private val repository: MovieRepository): ViewModel() {
     fun onIntent(intent: MovieIntent) {
         when (intent) {
             is MovieIntent.LoadMovies -> loadMovies()
-            is MovieIntent.ReloadMovies -> loadMovies()
+            is MovieIntent.ReloadMovies -> reloadMovies()
+        }
+    }
+
+    private fun reloadMovies() {
+        _state.value = MovieState(isLoading = true)
+        viewModelScope.launch {
+            val apiResponse = repository.fetchMoviesFromApi()
+            if (apiResponse.isSuccessful) {
+                apiResponse.body()?.results?.map { it.toMovieEntity() }?.let { movies ->
+                    repository.saveMovies(movies)
+                    _state.value = MovieState(movies = movies)
+                } ?: showError("Failed to load data.")
+            } else {
+                showError("Failed to load data.")
+            }
         }
     }
 
