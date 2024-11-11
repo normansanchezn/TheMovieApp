@@ -16,7 +16,7 @@ class MovieRepository(
     }
 
     suspend fun fetchMoviesFromApi(): Response<MovieResponse> {
-        return moviesApi.getPopularMovies("07f5ea02fd3b8c37e33ed145e738c258")
+        return moviesApi.getPopularMovies()
     }
 
     suspend fun saveMovies(movies: List<MovieEntity>) {

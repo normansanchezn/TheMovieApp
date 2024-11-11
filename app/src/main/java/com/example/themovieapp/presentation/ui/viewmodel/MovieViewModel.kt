@@ -21,7 +21,7 @@ class MovieViewModel(private val repository: MovieRepository): ViewModel() {
         }
     }
 
-    private fun loadMovies() {
+    fun loadMovies() {
         _state.value = MovieState(isLoading = true)
 
         viewModelScope.launch {

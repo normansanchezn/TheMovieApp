@@ -3,6 +3,7 @@ package com.example.themovieapp.di
 import androidx.room.Room
 import com.example.themovieapp.data.api.MoviesApi
 import com.example.themovieapp.data.database.AppDatabase
+import com.example.themovieapp.data.network.HeaderInterceptor
 import com.example.themovieapp.data.repository.MovieRepository
 import com.example.themovieapp.presentation.ui.viewmodel.MovieViewModel
 import okhttp3.OkHttpClient
@@ -18,7 +19,9 @@ val appModule = module {
     single {
         Retrofit.Builder()
             .baseUrl("https://api.themoviedb.org/3/")
-            .client(OkHttpClient.Builder().build())
+            .client(OkHttpClient.Builder().addInterceptor(
+                HeaderInterceptor()
+            ).build())
             .addConverterFactory(GsonConverterFactory.create())
             .build()
     }

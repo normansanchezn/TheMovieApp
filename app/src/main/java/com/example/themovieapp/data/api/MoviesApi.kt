@@ -9,7 +9,7 @@ interface MoviesApi {
 
     @GET("movie/popular")
     suspend fun getPopularMovies(
-        @Query("api_key") apiKey: String
+        @Query("language") language: String = "en-US"
     ): Response<MovieResponse>
 
 }

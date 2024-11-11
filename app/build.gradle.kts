@@ -1,7 +1,8 @@
 plugins {
-    kotlin("kapt")
+    id("kotlin-kapt")
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
+    id("androidx.room")
 }
 
 android {
@@ -41,6 +42,9 @@ android {
     kotlinOptions {
         jvmTarget = "11"
     }
+    room {
+        schemaDirectory("$projectDir/schemas")
+    }
 }
 
 dependencies {
@@ -72,6 +76,19 @@ dependencies {
     implementation(libs.coroutines)
 
     testImplementation(libs.junit)
+
+    testImplementation(libs.mockito)
+    testImplementation("org.mockito.kotlin:mockito-kotlin:4.0.0")
+
+    testImplementation("org.koin:koin-test:3.1.4")
+    testImplementation("org.koin:koin-test-junit4:3.1.4")
+    testImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:1.6.0")
+    testImplementation("androidx.arch.core:core-testing:2.1.0")
+
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
+}
+
+kapt {
+    correctErrorTypes = true
 }
