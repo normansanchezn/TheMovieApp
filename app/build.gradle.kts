@@ -1,4 +1,5 @@
 plugins {
+    kotlin("kapt")
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
 }
@@ -15,9 +16,19 @@ android {
         versionName = "1.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+
+        // TODO: Check this...
+        // buildConfigField("String", "API_KEY", "\"${project.findProperty("API_KEY") ?: ""}\"")
+    }
+
+    buildFeatures {
+        viewBinding = true
     }
 
     buildTypes {
+        debug {
+
+        }
         release {
             isMinifyEnabled = false
             proguardFiles(
@@ -42,6 +53,7 @@ dependencies {
     implementation(libs.material)
     implementation(libs.androidx.activity)
     implementation(libs.androidx.constraintlayout)
+    implementation(libs.lifeCycle)
 
     // Retrofit
     implementation(libs.retrofit)
@@ -54,7 +66,12 @@ dependencies {
     implementation(libs.glide)
 
     // ROOM
+    implementation(libs.roomRuntime)
     implementation(libs.room)
+
+    kapt("androidx.room:room-compiler:2.5.0")
+
+    implementation(libs.coroutines)
 
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)

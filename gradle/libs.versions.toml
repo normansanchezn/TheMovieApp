@@ -11,9 +11,11 @@ activity = "1.8.0"
 constraintlayout = "2.1.4"
 retrofitVersion = "2.9.0"
 converterGsonVersion = "2.9.0"
-koinVersion = "3.1.4"
+koinVersion = "3.3.3"
 glideVersion = "4.12.0"
-roomVersion = "2.5.0"
+roomVersion = "2.6.1"
+lifeCycleVersion = "2.8.7"
+coroutinesVersion = "1.6.4"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
@@ -28,7 +30,10 @@ retrofit = { group = "com.squareup.retrofit2", name = "retrofit", version.ref = 
 converterGson = { group = "com.squareup.retrofit2", name = "converter-gson", version.ref = "converterGsonVersion" }
 koin = { group = "io.insert-koin", name = "koin-android", version.ref = "koinVersion" }
 glide = { group = "com.github.bumptech.glide", name = "glide", version.ref = "glideVersion" }
-room = { group = "androidx.room", name = "room-runtime", version.ref = "roomVersion" }
+roomRuntime = { group = "androidx.room", name = "room-runtime", version.ref = "roomVersion" }
+room = { group = "androidx.room", name = "room-ktx", version.ref = "roomVersion" }
+coroutines = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-android", version.ref = "coroutinesVersion" }
+lifeCycle = { group = "androidx.lifecycle", name = "lifecycle-viewmodel-ktx", version.ref = "lifeCycleVersion" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
