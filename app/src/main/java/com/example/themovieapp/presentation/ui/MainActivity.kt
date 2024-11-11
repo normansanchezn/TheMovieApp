@@ -1,11 +1,14 @@
 package com.example.themovieapp.presentation.ui
 
 import android.os.Bundle
+import android.view.View
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.themovieapp.data.model.MovieEntity
 import com.example.themovieapp.databinding.ActivityMainBinding
+import com.example.themovieapp.presentation.extensions.gone
+import com.example.themovieapp.presentation.extensions.visible
 import com.example.themovieapp.presentation.ui.adapter.MovieAdapter
 import com.example.themovieapp.presentation.ui.intent.MovieIntent
 import com.example.themovieapp.presentation.ui.viewmodel.MovieViewModel
@@ -51,19 +54,19 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun showMovies(movies: List<MovieEntity>) {
-
+        movieAdapter.setListOfMovies(movies)
     }
 
     private fun hideLoading() {
-
+        binding.loadingProgressBar.gone()
     }
 
     private fun showLoading() {
-
+        binding.loadingProgressBar.visible()
     }
 
     private fun setupView() {
-        binding.moviesRV.apply {
+        binding.moviesRv.apply {
             layoutManager = LinearLayoutManager(this@MainActivity)
             adapter = movieAdapter
         }

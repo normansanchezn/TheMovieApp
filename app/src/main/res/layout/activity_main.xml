@@ -7,8 +7,13 @@
     android:layout_height="match_parent"
     tools:context=".presentation.ui.MainActivity">
 
+    <ProgressBar
+        android:id="@+id/loading_progress_bar"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/moviesRV"
+        android:id="@+id/movies_rv"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:layout_constraintBottom_toBottomOf="parent"

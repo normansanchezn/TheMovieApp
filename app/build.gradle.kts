@@ -26,9 +26,6 @@ android {
     }
 
     buildTypes {
-        debug {
-
-        }
         release {
             isMinifyEnabled = false
             proguardFiles(
@@ -64,6 +61,7 @@ dependencies {
 
     // Glide
     implementation(libs.glide)
+    kapt("com.github.bumptech.glide:compiler:4.14.2")
 
     // ROOM
     implementation(libs.roomRuntime)
