@@ -17,6 +17,13 @@ const val DATA_BASE_NAME = "movie_database"
 val appModule = module {
 
     single {
+        Room.databaseBuilder(
+            androidApplication(),
+            AppDatabase::class.java, DATA_BASE_NAME
+        ).build()
+    }
+
+    single {
         Retrofit.Builder()
             .baseUrl("https://api.themoviedb.org/3/")
             .client(OkHttpClient.Builder().addInterceptor(
@@ -30,16 +37,9 @@ val appModule = module {
         get<Retrofit>().create(MoviesApi::class.java)
     }
 
-    single {
-        Room.databaseBuilder(
-            androidApplication(),
-            AppDatabase::class.java, DATA_BASE_NAME
-        ).build()
-    }
-
     single { get<AppDatabase>().movieDao() }
 
     single { MovieRepository(get(), get()) }
 
-    factory { MovieViewModel(get()) }
+    single { MovieViewModel(get()) }
 }
